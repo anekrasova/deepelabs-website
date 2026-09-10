@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Deepe Labs, Inc.</title>
 <meta name="description" content="Deepe Labs, Inc. is a software company developing mobile applications and intelligent agents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
+<header class="site-header on-hero">
   <div class="wrap">
-    <a class="brand" href="index.html">Deepe Labs, Inc.</a>
+    <a class="brand" href="index.html">Deepe Labs</a>
     <nav class="site-nav">
       <a href="index.html">Home</a>
       <a href="privacy.html">Privacy</a>
@@ -19,22 +22,34 @@
   </div>
 </header>
 
-<main>
+<section class="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="wrap">
-    <h1>Deepe Labs, Inc.</h1>
-    <p class="lede">A software company developing mobile applications and intelligent agents.</p>
+    <span class="eyebrow">Deepe Labs, Inc.</span>
+    <h1>Software for what comes next.</h1>
+    <p class="lede">We design and build mobile applications and intelligent agents, from applied AI to the infrastructure that runs it.</p>
+  </div>
+</section>
 
-    <h2>About</h2>
-    <p>Deepe Labs, Inc. designs and builds software products, including mobile applications and AI-driven agents, for business and consumer use. Our work spans application development, backend infrastructure, and applied artificial intelligence.</p>
-
-    <h2>Contact</h2>
-    <div class="card">
-      <p style="margin-bottom:8px;">General inquiries</p>
-      <p style="margin-bottom:0;"><a href="mailto:hello@deepelabs.com">hello@deepelabs.com</a></p>
+<main class="plain">
+  <div class="wrap">
+    <div class="section">
+      <h2>About</h2>
+      <p>Deepe Labs, Inc. designs and builds software products, including mobile applications and AI-driven agents, for business and consumer use. Our work spans application development, backend infrastructure, and applied artificial intelligence.</p>
     </div>
 
-    <h2>Legal</h2>
-    <p>See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a>.</p>
+    <div class="section">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>General inquiries</p>
+        <p style="margin-bottom:0;"><a href="mailto:hello@deepelabs.com">hello@deepelabs.com</a></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Legal</h2>
+      <p>See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a>.</p>
+    </div>
   </div>
 </main>
 
@@ -47,5 +62,6 @@
     </div>
   </div>
 </footer>
+<script src="starfield.js"></script>
 </body>
 </html>
