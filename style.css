@@ -149,6 +149,10 @@ h1 {
   text-transform: uppercase;
 }
 
+.accent-word {
+  color: var(--glow);
+}
+
 .lede {
   color: var(--text-muted);
   font-size: 19px;
