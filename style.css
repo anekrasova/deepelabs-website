@@ -92,6 +92,9 @@ main.plain {
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border);
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
   padding: 96px 0 88px;
 }
 
@@ -108,8 +111,9 @@ main.plain {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 55% at 50% 20%, rgba(124, 140, 255, 0.16), transparent 70%),
-    linear-gradient(180deg, transparent 0%, var(--bg) 96%);
+  background: radial-gradient(ellipse 65% 60% at 50% 42%, rgba(124, 140, 255, 0.22), transparent 68%),
+    radial-gradient(ellipse 40% 30% at 50% 100%, rgba(94, 234, 212, 0.14), transparent 70%),
+    linear-gradient(180deg, transparent 0%, var(--bg) 98%);
   pointer-events: none;
   z-index: 0;
 }
@@ -244,6 +248,7 @@ footer.site-footer a:hover {
     margin-right: 20px;
   }
   .hero {
+    min-height: 76vh;
     padding: 72px 0 64px;
   }
 }
