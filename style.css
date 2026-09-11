@@ -60,6 +60,9 @@ header.site-header .wrap {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 15px;
@@ -67,6 +70,13 @@ header.site-header .wrap {
   text-decoration: none;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.brand-mark {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: block;
 }
 
 nav.site-nav a {
