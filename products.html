@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html"><img src="assets/logo-64.png" alt="" class="brand-mark">Deepe Labs</a>
@@ -30,14 +31,21 @@
     <h1>Products</h1>
     <p>Deepe Labs designs and builds custom software and AI systems for businesses across industries, alongside our own applications built to solve specific, real-world problems.</p>
 
-    <h2>Deepe</h2>
-    <p>Deepe is a pre-trip inspection and cargo security application for commercial trucking, currently in active development. It is designed to help drivers and fleets document vehicle inspections and cargo condition through photo and video capture, with backend processing built to support compliance recordkeeping. Deepe is not yet publicly released.</p>
+    <div class="section">
+      <h2>Deepe</h2>
+      <p>Deepe is a pre-trip inspection and cargo security application for commercial trucking, currently in active development. It is designed to help drivers and fleets document vehicle inspections and cargo condition through photo and video capture, with backend processing built to support compliance recordkeeping. Deepe is not yet publicly released.</p>
+    </div>
 
-    <h2>What's next</h2>
-    <p>Beyond Deepe, Deepe Labs is developing additional mobile applications and AI-driven agents across both business and consumer use cases. We'll publish details here as each product is ready to share.</p>
+    <div class="section">
+      <h2>What's next</h2>
+      <p>Beyond Deepe, Deepe Labs is developing additional mobile applications and AI-driven agents across both business and consumer use cases. We'll publish details here as each product is ready to share.</p>
+    </div>
 
-    <h2>Working with us</h2>
-    <p>We also take on custom software and AI engagements for businesses outside our own product line. If you'd like to discuss a project, see our <a href="contact.html">Contact page</a>.</p>
+    <div class="section">
+      <h2>Working with us</h2>
+      <p>We also take on custom software and AI engagements for businesses outside our own product line. If you'd like to discuss a project, we'd like to hear about it.</p>
+      <p class="section-cta"><a class="btn" href="contact.html#contact-form">Start a project</a></p>
+    </div>
   </div>
 </main>
 
@@ -50,5 +58,6 @@
     </div>
   </div>
 </footer>
+<script src="starfield.js"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 (function () {
-  var canvas = document.getElementById("hero-canvas");
+  var canvas = document.getElementById("bg-canvas");
   if (!canvas) return;
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
@@ -9,10 +9,9 @@
   var w, h, dpr;
 
   function resize() {
-    var rect = canvas.parentElement.getBoundingClientRect();
     dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = rect.width;
-    h = rect.height;
+    w = window.innerWidth;
+    h = window.innerHeight;
     canvas.width = w * dpr;
     canvas.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);

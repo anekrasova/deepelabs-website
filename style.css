@@ -10,6 +10,10 @@
   --max-width: 780px;
   --font-display: "Orbitron", "Space Grotesk", -apple-system, sans-serif;
   --font-body: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --glass-bg: linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.015)), rgba(8, 10, 16, 0.6);
+  --glass-bg-solid: #0d0f16;
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-border-accent: rgba(94, 234, 212, 0.28);
 }
 
 * {
@@ -114,13 +118,14 @@ main.plain {
   padding: 96px 0 88px;
 }
 
-.hero canvas {
-  position: absolute;
+#bg-canvas {
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
   display: block;
+  background: var(--bg);
 }
 
 .hero::after {
@@ -212,12 +217,33 @@ a:hover {
   color: var(--glow);
 }
 
-.card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 22px 26px;
+/* Glass panels: frosted, translucent blocks that let the fixed starfield
+   show through via backdrop-filter. The layered background (a faint white
+   sheen over a dark semi-opaque base) keeps body text at safe contrast
+   even where a bright star sits directly behind the panel. */
+.card,
+.section {
+  position: relative;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 26px 28px;
   margin: 24px 0;
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.section h2:first-child,
+.section h3:first-child {
+  margin-top: 0;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card,
+  .section {
+    background: var(--glass-bg-solid);
+  }
 }
 
 .card p:first-child {
@@ -232,6 +258,136 @@ a:hover {
   color: var(--text-muted);
   font-size: 13px;
   margin-bottom: 32px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  min-width: 44px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--glass-border-accent);
+  background: linear-gradient(160deg, rgba(94, 234, 212, 0.18), rgba(94, 234, 212, 0.04));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text);
+  box-shadow: 0 4px 18px rgba(94, 234, 212, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .btn {
+    background: #123832;
+  }
+}
+
+.btn:hover {
+  border-color: rgba(94, 234, 212, 0.55);
+  background: linear-gradient(160deg, rgba(94, 234, 212, 0.3), rgba(94, 234, 212, 0.08));
+  box-shadow: 0 6px 24px rgba(94, 234, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+  color: var(--text);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(94, 234, 212, 0.16), inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--glow);
+  outline-offset: 3px;
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: var(--glass-border);
+  box-shadow: none;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.hero-cta {
+  margin-top: 30px;
+}
+
+.section-cta {
+  margin-top: 18px;
+}
+
+/* Contact form */
+.contact-form label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 18px 0 8px;
+}
+
+.contact-form label:first-child {
+  margin-top: 0;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  outline-offset: 2px;
+}
+
+.contact-form textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  outline: 2px solid var(--glow);
+  border-color: var(--glass-border-accent);
+}
+
+.contact-form .btn {
+  margin-top: 22px;
+}
+
+.form-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 14px;
+  margin-bottom: 0;
+}
+
+.honeypot-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 
 footer.site-footer {
@@ -277,10 +433,17 @@ footer.site-footer a:hover {
     min-height: 76vh;
     padding: 72px 0 64px;
   }
+  .card,
+  .section {
+    padding: 22px 20px;
+  }
+  .btn {
+    width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero canvas {
+  #bg-canvas {
     display: none;
   }
 }

@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
 <header class="site-header">
   <div class="wrap">
     <a class="brand" href="index.html"><img src="assets/logo-64.png" alt="" class="brand-mark">Deepe Labs</a>
@@ -28,15 +29,41 @@
 <main class="plain">
   <div class="wrap">
     <h1>Contact</h1>
-    <p>For general inquiries, partnership questions, or support requests, reach us at the email address below.</p>
+    <p>Have a project in mind, a partnership question, or a support request? Send us a message below, or email us directly.</p>
+
+    <div class="section" id="contact-form">
+      <h2>Send us a message</h2>
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <label for="contact-name">Name</label>
+        <input type="text" id="contact-name" name="name" autocomplete="name" required>
+
+        <label for="contact-email">Email</label>
+        <input type="email" id="contact-email" name="email" autocomplete="email" required>
+
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" rows="6" required></textarea>
+
+        <!-- Honeypot field for basic spam filtering; left blank by real visitors, hidden from screen readers and sighted users alike. -->
+        <div class="honeypot-field" aria-hidden="true">
+          <label for="contact-company">Company</label>
+          <input type="text" id="contact-company" name="_gotcha" tabindex="-1" autocomplete="off">
+        </div>
+
+        <input type="hidden" name="_subject" value="New message from deepelabs.com">
+        <button type="submit" class="btn">Send message</button>
+      </form>
+      <p class="form-note">This form delivers to hello@deepelabs.com via Formspree. Prefer email? Use the address below instead.</p>
+    </div>
 
     <div class="card">
       <p>General inquiries</p>
       <p style="margin-bottom:0;"><a href="mailto:hello@deepelabs.com">hello@deepelabs.com</a></p>
     </div>
 
-    <h2>Location</h2>
-    <p>Deepe Labs, Inc. is incorporated in the State of Utah, United States.</p>
+    <div class="section">
+      <h2>Location</h2>
+      <p>Deepe Labs, Inc. is incorporated in the State of Utah, United States.</p>
+    </div>
   </div>
 </main>
 
@@ -49,5 +76,6 @@
     </div>
   </div>
 </footer>
+<script src="starfield.js"></script>
 </body>
 </html>
