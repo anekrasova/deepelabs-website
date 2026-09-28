@@ -60,7 +60,6 @@ header.site-header .wrap {
   padding-bottom: 22px;
   flex-wrap: wrap;
   gap: 12px;
-  max-width: 960px;
 }
 
 .brand {
@@ -84,13 +83,15 @@ header.site-header .wrap {
 }
 
 nav.site-nav a {
+  display: inline-block;
   font-family: var(--font-display);
   color: var(--text-muted);
   text-decoration: none;
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-left: 28px;
+  margin-left: 18px;
+  padding: 10px 6px;
   transition: color 0.15s ease;
 }
 
@@ -405,7 +406,6 @@ footer.site-footer .wrap {
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  max-width: 960px;
 }
 
 footer.site-footer a {
@@ -431,7 +431,8 @@ footer.site-footer a:hover {
   }
   nav.site-nav a {
     margin-left: 0;
-    margin-right: 20px;
+    margin-right: 10px;
+    padding: 10px 6px 10px 0;
   }
   .hero {
     min-height: 76vh;
