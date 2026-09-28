@@ -164,6 +164,15 @@ h1 {
   text-transform: uppercase;
 }
 
+/* Lighter heading treatment for content-light interior pages (About,
+   Terms, Privacy) so the type weight matches the amount of content
+   underneath it, rather than the full hero-scale display heading. */
+h1.compact {
+  font-size: clamp(24px, 4vw, 32px);
+  letter-spacing: 0.02em;
+  margin-bottom: 14px;
+}
+
 .accent-word {
   color: var(--glow);
 }
