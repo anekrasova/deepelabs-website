@@ -6,7 +6,7 @@
   var GLOW = "#5eead4";
 
   var FROG_SVG =
-    '<svg viewBox="0 0 200 200" fill="none" aria-hidden="true" focusable="false">' +
+    '<svg viewBox="0 0 200 200" width="100%" height="100%" fill="none" aria-hidden="true" focusable="false">' +
     '<defs><linearGradient id="dfSkinLive" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">' +
     '<stop offset="0" stop-color="' + GLOW + '"/><stop offset="1" stop-color="#2fa88f"/>' +
     "</linearGradient></defs>" +
@@ -50,7 +50,8 @@
       "#deepe-frog-launcher{position:relative;width:64px;height:64px;border-radius:50%;border:1px solid rgba(94,234,212,.4);cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,rgba(94,234,212,.22),rgba(124,140,255,.10)),rgba(8,10,16,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 28px rgba(94,234,212,.18),inset 0 1px 0 rgba(255,255,255,.14);}" +
       "#deepe-frog-launcher:focus-visible{outline:2px solid " + GLOW + ";outline-offset:3px;}" +
       "#deepe-frog-launcher .df-pulse-ring{position:absolute;inset:0;border-radius:50%;background:" + GLOW + ";opacity:.5;animation:dfPulse 2.4s ease-out infinite;pointer-events:none;}" +
-      "#deepe-frog-launcher .df-icon{width:44px;height:44px;animation:dfBob 3.6s ease-in-out infinite;}" +
+      "#deepe-frog-launcher .df-icon{display:block;width:44px;height:44px;animation:dfBob 3.6s ease-in-out infinite;}" +
+      "#deepe-frog-launcher .df-icon svg{display:block;width:100%;height:100%;}" +
       "#deepe-frog-launcher .df-badge{position:absolute;top:-3px;right:-3px;width:13px;height:13px;border-radius:50%;background:" + ACCENT + ";border:2px solid #05060a;}" +
       "#deepe-frog-tooltip{position:absolute;right:76px;bottom:16px;padding:9px 15px;border-radius:999px;background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.015)),rgba(8,10,16,.8);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);font-size:13px;color:#f2f3f6;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .15s ease;}" +
       "#deepe-frog-launcher:hover + #deepe-frog-tooltip,#deepe-frog-launcher:focus-visible + #deepe-frog-tooltip{opacity:1;}" +
@@ -58,7 +59,8 @@
       "#deepe-frog-panel{position:absolute;right:0;bottom:0;width:min(360px,calc(100vw - 32px));height:min(560px,calc(100vh - 120px));display:none;flex-direction:column;overflow:hidden;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.01)),#05060a;border:1px solid #1d212b;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,.5);}" +
       "#deepe-frog-root.is-open #deepe-frog-panel{display:flex;}" +
       "#deepe-frog-panel .df-head{flex-shrink:0;display:flex;align-items:center;gap:12px;padding:16px 16px;border-bottom:1px solid rgba(255,255,255,.08);background:radial-gradient(ellipse 90% 120% at 25% 0%,rgba(94,234,212,.14),transparent 70%);}" +
-      "#deepe-frog-panel .df-avatar{width:44px;height:44px;flex-shrink:0;}" +
+      "#deepe-frog-panel .df-avatar{display:block;width:44px;height:44px;flex-shrink:0;}" +
+      "#deepe-frog-panel .df-avatar svg{display:block;width:100%;height:100%;}" +
       "#deepe-frog-panel .df-title{font-family:var(--font-display,'Orbitron',sans-serif);font-weight:700;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:#f2f3f6;}" +
       "#deepe-frog-panel .df-subtitle{margin-top:2px;font-size:12px;color:#9199a8;}" +
       "#deepe-frog-panel .df-close{margin-left:auto;flex-shrink:0;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#9199a8;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}" +
