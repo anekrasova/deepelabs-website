@@ -47,7 +47,23 @@
     "Why did the satellite break up with the moon? It needed space.",
     "I tried orbital mechanics once. Now everything just goes in circles.",
     "Light beats sound in a race every time — that is why some status updates look bright long before they sound good.",
-    "Deepe Frog does not do black holes. Bad energy, worse compression ratio."
+    "Deepe Frog does not do black holes. Bad energy, worse compression ratio.",
+    "My pre-trip inspection covers the whole vehicle except the flux capacitor. That one is still pending FMCSA guidance.",
+    "Space is completely silent. Somehow the group chat is still louder.",
+    "I asked a black hole for feedback on my report. It just absorbed the whole conversation.",
+    "Astronauts never get cold. They have a lot of space heaters.",
+    "A comet walked into a bar. The bartender said we do not serve tails here.",
+    "My favorite unit of distance is the light year, because it sounds fast but is mostly just waiting.",
+    "Why did the rocket lose its job? It kept getting fired.",
+    "I would tell a joke about the asteroid belt, but it is a bit too spaced out.",
+    "The DVIR checklist has no item for warp core integrity. I checked twice.",
+    "Gravity is hard to escape. Deadlines are worse.",
+    "Why do planets never get invited to parties? They already have too many rings to keep track of.",
+    "I am not saying my inbox is a black hole, but nothing that goes in ever comes back out.",
+    "The best thing about space travel is the legroom. Terrible thing too, actually.",
+    "Why did the frog become an astronaut? Turns out lily pads and space stations both float.",
+    "Every star eventually runs out of fuel. Please, unlike them, fill up your tank before the trip.",
+    "I skipped the astronaut training simulator. Too much pressure."
   ];
 
   var lastJokeIndex = -1;
