@@ -4,6 +4,8 @@
   var STYLE_ID = "deepe-frog-style";
   var ACCENT = "#7c8cff";
   var GLOW = "#5eead4";
+  // Distinct accent for playful/off-topic actions (currently just the joke
+  // chip), kept visually separate from the primary teal/indigo action colors.
   var FUN = "var(--accent-fun, #ff90ac)";
 
   var frogSvgInstances = 0;
@@ -81,6 +83,8 @@
   function css() {
     return "" +
       "#deepe-frog-root{position:fixed;right:24px;bottom:24px;z-index:2147483000;font-family:var(--font-body,'Space Grotesk',sans-serif);}" +
+      "#deepe-frog-backdrop{position:fixed;inset:0;background:rgba(5,6,10,.55);opacity:0;pointer-events:none;transition:opacity .18s ease;}" +
+      "#deepe-frog-root.is-open #deepe-frog-backdrop{opacity:1;pointer-events:auto;}" +
       "@keyframes dfBob{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-5px) rotate(2deg);}}" +
       "@keyframes dfPulse{0%{transform:scale(1);opacity:.5;}70%{transform:scale(1.7);opacity:0;}100%{transform:scale(1.7);opacity:0;}}" +
       "#deepe-frog-launcher{position:relative;width:64px;height:64px;border-radius:50%;border:1px solid rgba(94,234,212,.4);cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,rgba(94,234,212,.22),rgba(124,140,255,.10)),rgba(8,10,16,.7);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 8px 28px rgba(94,234,212,.18),inset 0 1px 0 rgba(255,255,255,.14);}" +
@@ -99,7 +103,7 @@
       "#deepe-frog-panel .df-avatar svg{display:block;width:100%;height:100%;}" +
       "#deepe-frog-panel .df-title{font-family:var(--font-display,'Orbitron',sans-serif);font-weight:700;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:#f2f3f6;}" +
       "#deepe-frog-panel .df-subtitle{margin-top:2px;font-size:12px;color:#9199a8;}" +
-      "#deepe-frog-panel .df-close{margin-left:auto;flex-shrink:0;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#9199a8;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}" +
+      "#deepe-frog-panel .df-close{margin-left:auto;flex-shrink:0;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#9199a8;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;}" +
       "#deepe-frog-panel .df-close:focus-visible{outline:2px solid " + GLOW + ";outline-offset:2px;}" +
       "#deepe-frog-panel .df-messages{flex-grow:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px;}" +
       "#deepe-frog-panel .df-msg{max-width:84%;padding:11px 13px;border-radius:14px;font-size:13px;line-height:1.5;}" +
@@ -113,8 +117,8 @@
       "#deepe-frog-panel .df-inputwrap{display:flex;align-items:center;gap:10px;padding:6px 6px 6px 15px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);}" +
       "#deepe-frog-panel .df-input{flex-grow:1;min-width:0;border:none;outline:none;background:transparent;font-family:var(--font-body,'Space Grotesk',sans-serif);font-size:13px;color:#f2f3f6;padding:8px 0;}" +
       "#deepe-frog-panel .df-input::placeholder{color:#9199a8;}" +
-      "#deepe-frog-panel .df-send{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:none;background:" + GLOW + ";color:#05060a;cursor:pointer;display:flex;align-items:center;justify-content:center;}" +
-      "#deepe-frog-panel .df-foot{margin-top:8px;text-align:center;font-size:10px;letter-spacing:.04em;color:#565c6b;}" +
+      "#deepe-frog-panel .df-send{flex-shrink:0;width:40px;height:40px;border-radius:50%;border:none;background:" + GLOW + ";color:#05060a;cursor:pointer;display:flex;align-items:center;justify-content:center;}" +
+      "#deepe-frog-panel .df-foot{margin-top:8px;text-align:center;font-size:11px;letter-spacing:.04em;color:var(--text-muted,#9199a8);}" +
       "#deepe-frog-panel .df-demo-form{display:flex;flex-direction:column;gap:10px;padding:12px 13px;border-radius:14px 14px 14px 4px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015)),rgba(8,10,16,.6);border:1px solid rgba(94,234,212,.22);max-width:92%;align-self:flex-start;}" +
       "#deepe-frog-panel .df-demo-submit{align-self:flex-start;padding:8px 16px;border-radius:999px;border:none;background:" + GLOW + ";color:#05060a;font-family:var(--font-display,'Orbitron',sans-serif);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;}" +
       "#deepe-frog-panel .df-demo-submit:focus-visible{outline:2px solid " + GLOW + ";outline-offset:2px;}" +
@@ -163,6 +167,8 @@
     injectStyle();
 
     var root = el("div", { id: "deepe-frog-root" });
+
+    var backdrop = el("div", { id: "deepe-frog-backdrop", "aria-hidden": "true" });
 
     var launcher = el(
       "button",
@@ -363,6 +369,7 @@
     panel.appendChild(chips);
     panel.appendChild(inputRow);
 
+    root.appendChild(backdrop);
     root.appendChild(launcher);
     root.appendChild(tooltip);
     root.appendChild(panel);
@@ -383,6 +390,7 @@
 
     launcher.addEventListener("click", openPanel);
     closeBtn.addEventListener("click", closePanel);
+    backdrop.addEventListener("click", closePanel);
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && root.classList.contains("is-open")) closePanel();
     });
