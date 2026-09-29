@@ -5,35 +5,42 @@
   var ACCENT = "#7c8cff";
   var GLOW = "#5eead4";
 
-  var FROG_SVG =
-    '<svg viewBox="0 0 200 200" width="100%" height="100%" fill="none" aria-hidden="true" focusable="false">' +
-    '<defs><linearGradient id="dfSkinLive" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">' +
-    '<stop offset="0" stop-color="' + GLOW + '"/><stop offset="1" stop-color="#2fa88f"/>' +
-    "</linearGradient></defs>" +
-    '<ellipse cx="100" cy="178" rx="44" ry="12" fill="#141822"/>' +
-    '<ellipse cx="100" cy="178" rx="30" ry="7" fill="#1d212b"/>' +
-    '<ellipse cx="100" cy="134" rx="52" ry="40" fill="url(#dfSkinLive)"/>' +
-    '<circle cx="100" cy="96" r="56" fill="url(#dfSkinLive)"/>' +
-    '<circle cx="70" cy="58" r="23" fill="url(#dfSkinLive)"/>' +
-    '<circle cx="130" cy="58" r="23" fill="url(#dfSkinLive)"/>' +
-    '<circle cx="70" cy="56" r="15" fill="#f7f8fb"/>' +
-    '<circle cx="130" cy="56" r="15" fill="#f7f8fb"/>' +
-    '<circle cx="73" cy="52" r="7.5" fill="#0a0c12"/>' +
-    '<circle cx="133" cy="52" r="7.5" fill="#0a0c12"/>' +
-    '<circle cx="76" cy="49" r="2.2" fill="#ffffff"/>' +
-    '<circle cx="136" cy="49" r="2.2" fill="#ffffff"/>' +
-    '<ellipse cx="52" cy="96" rx="9" ry="5.5" fill="' + ACCENT + '" opacity="0.35"/>' +
-    '<ellipse cx="148" cy="96" rx="9" ry="5.5" fill="' + ACCENT + '" opacity="0.35"/>' +
-    '<path d="M64 104C64 118 80 128 100 128C120 128 136 118 136 104" stroke="#0a0c12" stroke-width="5" stroke-linecap="round" fill="none"/>' +
-    '<path d="M100 122C104 132 112 140 122 142" stroke="#ff90ac" stroke-width="7" stroke-linecap="round" fill="none"/>' +
-    '<path d="M64 40C58 26 60 14 68 6" stroke="url(#dfSkinLive)" stroke-width="4" stroke-linecap="round"/>' +
-    '<circle cx="69" cy="5" r="4.5" fill="' + GLOW + '"/>' +
-    '<path d="M40 118C26 112 16 116 12 128" stroke="url(#dfSkinLive)" stroke-width="12" stroke-linecap="round"/>' +
-    '<circle cx="10" cy="130" r="8" fill="url(#dfSkinLive)"/>' +
-    '<path d="M128 142L132 128L142 122L140 136Z" fill="#f7f8fb"/>' +
-    '<path d="M132 128L134 116L144 112L142 124Z" fill="#f7f8fb" opacity="0.85"/>' +
-    '<path d="M120 148L124 138L130 136L127 146Z" fill="#f7f8fb" opacity="0.7"/>' +
-    "</svg>";
+  var frogSvgInstances = 0;
+
+  function frogSvg() {
+    frogSvgInstances += 1;
+    var gid = "dfSkinLive-" + frogSvgInstances;
+    return (
+      '<svg viewBox="0 0 200 200" width="100%" height="100%" fill="none" aria-hidden="true" focusable="false">' +
+      '<defs><linearGradient id="' + gid + '" x1="20" y1="20" x2="180" y2="180" gradientUnits="userSpaceOnUse">' +
+      '<stop offset="0" stop-color="' + GLOW + '"/><stop offset="1" stop-color="#2fa88f"/>' +
+      "</linearGradient></defs>" +
+      '<ellipse cx="100" cy="178" rx="44" ry="12" fill="#141822"/>' +
+      '<ellipse cx="100" cy="178" rx="30" ry="7" fill="#1d212b"/>' +
+      '<ellipse cx="100" cy="134" rx="52" ry="40" fill="url(#' + gid + ')"/>' +
+      '<circle cx="100" cy="96" r="56" fill="url(#' + gid + ')"/>' +
+      '<circle cx="70" cy="58" r="23" fill="url(#' + gid + ')"/>' +
+      '<circle cx="130" cy="58" r="23" fill="url(#' + gid + ')"/>' +
+      '<circle cx="70" cy="56" r="15" fill="#f7f8fb"/>' +
+      '<circle cx="130" cy="56" r="15" fill="#f7f8fb"/>' +
+      '<circle cx="73" cy="52" r="7.5" fill="#0a0c12"/>' +
+      '<circle cx="133" cy="52" r="7.5" fill="#0a0c12"/>' +
+      '<circle cx="76" cy="49" r="2.2" fill="#ffffff"/>' +
+      '<circle cx="136" cy="49" r="2.2" fill="#ffffff"/>' +
+      '<ellipse cx="52" cy="96" rx="9" ry="5.5" fill="' + ACCENT + '" opacity="0.35"/>' +
+      '<ellipse cx="148" cy="96" rx="9" ry="5.5" fill="' + ACCENT + '" opacity="0.35"/>' +
+      '<path d="M64 104C64 118 80 128 100 128C120 128 136 118 136 104" stroke="#0a0c12" stroke-width="5" stroke-linecap="round" fill="none"/>' +
+      '<path d="M100 122C104 132 112 140 122 142" stroke="#ff90ac" stroke-width="7" stroke-linecap="round" fill="none"/>' +
+      '<path d="M64 40C58 26 60 14 68 6" stroke="url(#' + gid + ')" stroke-width="4" stroke-linecap="round"/>' +
+      '<circle cx="69" cy="5" r="4.5" fill="' + GLOW + '"/>' +
+      '<path d="M40 118C26 112 16 116 12 128" stroke="url(#' + gid + ')" stroke-width="12" stroke-linecap="round"/>' +
+      '<circle cx="10" cy="130" r="8" fill="url(#' + gid + ')"/>' +
+      '<path d="M128 142L132 128L142 122L140 136Z" fill="#f7f8fb"/>' +
+      '<path d="M132 128L134 116L144 112L142 124Z" fill="#f7f8fb" opacity="0.85"/>' +
+      '<path d="M120 148L124 138L130 136L127 146Z" fill="#f7f8fb" opacity="0.7"/>' +
+      "</svg>"
+    );
+  }
 
   var JOKES = [
     "Why did the satellite break up with the moon? It needed space.",
@@ -128,7 +135,7 @@
       "button",
       { id: "deepe-frog-launcher", type: "button", "aria-label": "Open Deepe Frog chat", "aria-expanded": "false" },
       '<span class="df-pulse-ring" aria-hidden="true"></span>' +
-        '<span class="df-icon">' + FROG_SVG + "</span>" +
+        '<span class="df-icon">' + frogSvg() + "</span>" +
         '<span class="df-badge" aria-hidden="true"></span>'
     );
 
@@ -139,7 +146,7 @@
     var head = el(
       "div",
       { class: "df-head" },
-      '<span class="df-avatar">' + FROG_SVG + "</span>" +
+      '<span class="df-avatar">' + frogSvg() + "</span>" +
         '<span><span class="df-title">Deepe Frog</span><br><span class="df-subtitle">Catching stars &amp; DVIRs since 2026</span></span>'
     );
     var closeBtn = el("button", { class: "df-close", type: "button", "aria-label": "Close chat" },
