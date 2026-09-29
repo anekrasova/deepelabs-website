@@ -378,14 +378,25 @@
     function openPanel() {
       root.classList.add("is-open");
       launcher.setAttribute("aria-expanded", "true");
-      setTimeout(function () {
-        input.focus();
-      }, 50);
+      var hasPhysicalKeyboard = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      if (hasPhysicalKeyboard) {
+        setTimeout(function () {
+          input.focus();
+        }, 50);
+      }
     }
     function closePanel() {
       root.classList.remove("is-open");
       launcher.setAttribute("aria-expanded", "false");
       launcher.focus();
+    }
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", function () {
+        if (root.classList.contains("is-open")) {
+          messages.scrollTop = messages.scrollHeight;
+        }
+      });
     }
 
     launcher.addEventListener("click", openPanel);

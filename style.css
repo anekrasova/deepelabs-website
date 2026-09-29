@@ -168,7 +168,7 @@ nav.site-nav a:focus {
 
   nav.site-nav a {
     margin-left: 0;
-    padding: 14px 4px;
+    padding: 14px 24px;
     border-bottom: 1px solid var(--glass-border);
   }
 
