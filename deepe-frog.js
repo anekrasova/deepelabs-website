@@ -115,6 +115,10 @@
       "#deepe-frog-panel .df-input::placeholder{color:#9199a8;}" +
       "#deepe-frog-panel .df-send{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:none;background:" + GLOW + ";color:#05060a;cursor:pointer;display:flex;align-items:center;justify-content:center;}" +
       "#deepe-frog-panel .df-foot{margin-top:8px;text-align:center;font-size:10px;letter-spacing:.04em;color:#565c6b;}" +
+      "#deepe-frog-panel .df-demo-form{display:flex;flex-direction:column;gap:10px;padding:12px 13px;border-radius:14px 14px 14px 4px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015)),rgba(8,10,16,.6);border:1px solid rgba(94,234,212,.22);max-width:92%;align-self:flex-start;}" +
+      "#deepe-frog-panel .df-demo-submit{align-self:flex-start;padding:8px 16px;border-radius:999px;border:none;background:" + GLOW + ";color:#05060a;font-family:var(--font-display,'Orbitron',sans-serif);font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;}" +
+      "#deepe-frog-panel .df-demo-submit:focus-visible{outline:2px solid " + GLOW + ";outline-offset:2px;}" +
+      "#deepe-frog-panel .df-demo-submit:disabled{opacity:.6;cursor:default;}" +
       "@media (prefers-reduced-motion: reduce){#deepe-frog-launcher .df-icon,.df-pulse-ring{animation:none;}}" +
       "@media (max-width:480px){#deepe-frog-root{right:16px;bottom:16px;}#deepe-frog-panel{right:-8px;}}";
   }
@@ -197,6 +201,89 @@
       "bot"
     );
 
+    var demoFlow = null;
+
+    var DEMO_STEPS = [
+      { key: "name", ask: function () { return "First things first, what's your name?"; } },
+      { key: "email", ask: function (a) { return "Great to meet you, " + a.name + ". What's the best work email to reach you at?"; }, validate: function (v) { return v.indexOf("@") !== -1 && v.indexOf(".") !== -1; }, retry: "That doesn't look like a full email address — mind trying again?" },
+      { key: "company", ask: function () { return "Which company or fleet are you with?"; } },
+      { key: "fleetSize", ask: function () { return "Roughly how many trucks are you running?"; }, choices: ["1 to 5", "6 to 20", "21 to 50", "50+"] },
+      { key: "currentProcess", ask: function () { return "What are you using for pre-trip inspections today?"; }, choices: ["Paper", "Spreadsheet", "Another app", "Nothing formal"] },
+      { key: "painPoint", ask: function () { return "What's the main thing you're hoping Deepe can fix for you?"; } },
+      { key: "timing", ask: function () { return "Last one — any preferred day or time for a quick call? Your best guess is fine."; } }
+    ];
+
+    function askDemoStep() {
+      var step = DEMO_STEPS[demoFlow.index];
+      addMessage(step.ask(demoFlow.answers), "bot");
+      if (step.choices) {
+        var choiceWrap = el("div", { class: "df-chips" });
+        step.choices.forEach(function (choice) {
+          var btn = el("button", { class: "df-chip", type: "button" }, choice);
+          btn.addEventListener("click", function () {
+            choiceWrap.remove();
+            recordDemoAnswer(choice);
+          });
+          choiceWrap.appendChild(btn);
+        });
+        messages.appendChild(choiceWrap);
+        messages.scrollTop = messages.scrollHeight;
+      }
+    }
+
+    function recordDemoAnswer(value) {
+      var step = DEMO_STEPS[demoFlow.index];
+      addMessage(value, "user");
+      demoFlow.answers[step.key] = value;
+      demoFlow.index++;
+      if (demoFlow.index < DEMO_STEPS.length) {
+        setTimeout(askDemoStep, 350);
+      } else {
+        setTimeout(finishDemoFlow, 350);
+      }
+    }
+
+    function startDemoFlow() {
+      demoFlow = { index: 0, answers: {} };
+      setTimeout(function () {
+        addMessage("Happy to set that up — I'll just need a few details so the team walks into the call prepared. Seven quick questions, promise.", "bot");
+        setTimeout(askDemoStep, 400);
+      }, 300);
+    }
+
+    function finishDemoFlow() {
+      var a = demoFlow.answers;
+      var summary =
+        "Name: " + a.name +
+        "\nWork email: " + a.email +
+        "\nCompany / fleet: " + a.company +
+        "\nFleet size: " + a.fleetSize +
+        "\nCurrent process: " + a.currentProcess +
+        "\nMain need: " + a.painPoint +
+        "\nPreferred time: " + a.timing;
+
+      addMessage("Here's what I've got for the team:", "bot");
+      var summaryBox = el("div", { class: "df-demo-form" });
+      var pre = el("div", { style: "white-space:pre-line;font-size:13px;color:#f2f3f6;" });
+      pre.textContent = summary;
+      summaryBox.appendChild(pre);
+      var sendBtn2 = el("button", { type: "button", class: "df-demo-submit" }, "Send to Deepe Labs");
+      summaryBox.appendChild(sendBtn2);
+      messages.appendChild(summaryBox);
+      messages.scrollTop = messages.scrollHeight;
+
+      sendBtn2.addEventListener("click", function () {
+        window.location.href =
+          "mailto:hello@deepelabs.com" +
+          "?subject=" + encodeURIComponent("Demo request from deepelabs.com") +
+          "&body=" + encodeURIComponent(summary);
+        sendBtn2.disabled = true;
+        sendBtn2.textContent = "Opening email…";
+        addMessage("That opened an email to our team with everything above — send it and we'll get back to you within one business day.", "bot");
+        demoFlow = null;
+      });
+    }
+
     var chips = el("div", { class: "df-chips" });
     var chipSeeDeepe = el("button", { class: "df-chip", type: "button" }, "See Deepe");
     var chipDemo = el("button", { class: "df-chip", type: "button" }, "Book a demo");
@@ -214,12 +301,7 @@
     });
     chipDemo.addEventListener("click", function () {
       addMessage("Book a demo", "user");
-      setTimeout(function () {
-        addMessage("Best way to set that up is through the contact form — want me to open it for you?", "bot");
-        var link = el("div", { class: "df-msg bot" }, '<a href="contact.html#contact-form" style="color:' + GLOW + ';">Open the contact form</a>');
-        messages.appendChild(link);
-        messages.scrollTop = messages.scrollHeight;
-      }, 400);
+      startDemoFlow();
     });
     chipJoke.addEventListener("click", function () {
       addMessage("Tell me a space joke", "user");
@@ -246,8 +328,22 @@
     function sendCurrentInput() {
       var text = input.value.trim();
       if (!text) return;
-      addMessage(text, "user");
       input.value = "";
+
+      if (demoFlow) {
+        var step = DEMO_STEPS[demoFlow.index];
+        if (step.validate && !step.validate(text)) {
+          addMessage(text, "user");
+          setTimeout(function () {
+            addMessage(step.retry || "Could you try that again?", "bot");
+          }, 300);
+          return;
+        }
+        recordDemoAnswer(text);
+        return;
+      }
+
+      addMessage(text, "user");
       var reply = canned(text);
       setTimeout(function () {
         addMessage(reply, "bot");
