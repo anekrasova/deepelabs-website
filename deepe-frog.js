@@ -50,6 +50,18 @@
     "Deepe Frog does not do black holes. Bad energy, worse compression ratio."
   ];
 
+  var lastJokeIndex = -1;
+
+  function pickJoke() {
+    if (JOKES.length <= 1) return JOKES[0];
+    var index;
+    do {
+      index = Math.floor(Math.random() * JOKES.length);
+    } while (index === lastJokeIndex);
+    lastJokeIndex = index;
+    return JOKES[index];
+  }
+
   function css() {
     return "" +
       "#deepe-frog-root{position:fixed;right:24px;bottom:24px;z-index:2147483000;font-family:var(--font-body,'Space Grotesk',sans-serif);}" +
@@ -113,7 +125,7 @@
   function canned(text) {
     var t = text.toLowerCase();
     if (t.indexOf("joke") !== -1) {
-      return JOKES[Math.floor(Math.random() * JOKES.length)];
+      return pickJoke();
     }
     if (t.indexOf("deepe") !== -1 || t.indexOf("dvir") !== -1 || t.indexOf("product") !== -1) {
       return "Deepe turns a driver's walkaround video into a signed, FMCSA-compliant DVIR. Full details at deepe.com.";
@@ -196,7 +208,7 @@
     chipJoke.addEventListener("click", function () {
       addMessage("Tell me a space joke", "user");
       setTimeout(function () {
-        addMessage(JOKES[Math.floor(Math.random() * JOKES.length)], "bot");
+        addMessage(pickJoke(), "bot");
       }, 400);
     });
 
