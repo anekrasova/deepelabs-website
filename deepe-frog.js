@@ -4,6 +4,7 @@
   var STYLE_ID = "deepe-frog-style";
   var ACCENT = "#7c8cff";
   var GLOW = "#5eead4";
+  var FUN = "var(--accent-fun, #ff90ac)";
 
   var frogSvgInstances = 0;
 
@@ -30,7 +31,7 @@
       '<ellipse cx="52" cy="96" rx="9" ry="5.5" fill="' + ACCENT + '" opacity="0.35"/>' +
       '<ellipse cx="148" cy="96" rx="9" ry="5.5" fill="' + ACCENT + '" opacity="0.35"/>' +
       '<path d="M64 104C64 118 80 128 100 128C120 128 136 118 136 104" stroke="#0a0c12" stroke-width="5" stroke-linecap="round" fill="none"/>' +
-      '<path d="M100 122C104 132 112 140 122 142" stroke="#ff90ac" stroke-width="7" stroke-linecap="round" fill="none"/>' +
+      '<path d="M100 122C104 132 112 140 122 142" stroke="' + FUN + '" stroke-width="7" stroke-linecap="round" fill="none"/>' +
       '<path d="M64 40C58 26 60 14 68 6" stroke="url(#' + gid + ')" stroke-width="4" stroke-linecap="round"/>' +
       '<circle cx="69" cy="5" r="4.5" fill="' + GLOW + '"/>' +
       '<path d="M40 118C26 112 16 116 12 128" stroke="url(#' + gid + ')" stroke-width="12" stroke-linecap="round"/>' +
@@ -78,7 +79,7 @@
       "#deepe-frog-panel .df-msg.user{align-self:flex-end;border-radius:14px 14px 4px 14px;background:" + ACCENT + ";color:#05060a;font-weight:500;}" +
       "#deepe-frog-panel .df-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px 12px;flex-shrink:0;}" +
       "#deepe-frog-panel .df-chip{font-family:var(--font-display,'Orbitron',sans-serif);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:8px 13px;border-radius:999px;border:1px solid rgba(124,140,255,.35);background:rgba(124,140,255,.08);color:#f2f3f6;cursor:pointer;}" +
-      "#deepe-frog-panel .df-chip.df-chip-fun{border-color:rgba(255,144,172,.35);background:rgba(255,144,172,.08);}" +
+      "#deepe-frog-panel .df-chip.df-chip-fun{border-color:color-mix(in srgb, " + FUN + " 35%, transparent);background:color-mix(in srgb, " + FUN + " 8%, transparent);}" +
       "#deepe-frog-panel .df-chip:focus-visible,#deepe-frog-panel .df-send:focus-visible,#deepe-frog-panel .df-input:focus-visible{outline:2px solid " + GLOW + ";outline-offset:2px;}" +
       "#deepe-frog-panel .df-inputrow{flex-shrink:0;padding:12px 14px 12px;border-top:1px solid rgba(255,255,255,.08);}" +
       "#deepe-frog-panel .df-inputwrap{display:flex;align-items:center;gap:10px;padding:6px 6px 6px 15px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);}" +
