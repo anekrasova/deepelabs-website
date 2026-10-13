@@ -523,3 +523,52 @@ footer.site-footer a:hover {
     display: none;
   }
 }
+
+/* Product feature grid (two-column cards, used on per-product pages) */
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.feature-grid .card {
+  margin: 0;
+}
+
+/* Undo the small-uppercase-label treatment of `.card p:first-child`: these
+   cards hold full sentences, not a label. */
+.feature-grid .card p:first-child {
+  color: var(--text-muted);
+  font-size: 15px;
+  text-transform: none;
+  letter-spacing: normal;
+  margin-bottom: 0;
+}
+
+.feature-grid .card strong {
+  color: var(--text);
+}
+
+.feature-grid .card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 640px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+ol {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  color: var(--text-muted);
+}
+
+/* Store badges before a listing is live: look like buttons, are not interactive */
+.btn-disabled {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
